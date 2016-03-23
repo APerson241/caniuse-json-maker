@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Caniuse JSON Maker</title>
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <script src="assets/js/script.js"></script>
+  </head>
+  <body>
+    <h1>Caniuse JSON Maker</h1>
+    <i>An easy way to make JSON files for use in the <a href="http://caniuse.com">Caniuse</a> database.</i>
+    <hr />
+    <h2>Metadata</h2>
+    <table id="form">
+      <tr>
+        <th><label for="title">Title</label></th>
+        <td><input type="text" id="title" name="title" /></td>
+      </tr>
+      <tr>
+        <th><label for="description">Description</label></th>
+        <td><input type="text" id="description" name="description" /></td>
+      </tr>
+      <tr>
+        <th><label for="spec">Spec URL</label></th>
+        <td><input type="text" id="spec" name="spec" /></td>
+      </tr>
+      <tr>
+        <th><label for="status">Status</label></th>
+        <td>
+          <input type="radio" name="status" value="ls" id="ls" /><label for="ls"><code>ls</code> - WHATWG Living Standard</label><br />
+          <input type="radio" name="status" value="rec" id="rec" /><label for="rec"><code>rec</code> - W3C Recommendation</label><br />
+          <input type="radio" name="status" value="pr" id="pr" /><label for="pr"><code>pr</code> - W3C Proposed Recommendation</label><br />
+          <input type="radio" name="status" value="cr" id="cr" /><label for="cr"><code>cr</code> - W3C Candidate Recommendation</label><br />
+          <input type="radio" name="status" value="wd" id="wd" /><label for="wd"><code>wd</code> - W3C Working Draft</label><br />
+          <input type="radio" name="status" value="other" id="other" /><label for="other"><code>other</code> - Non-W3C, but reputable</label><br />
+          <input type="radio" name="status" value="unoff" id="unoff" /><label for="unoff"><code>unoff</code> - Unofficial, Editor's Draft or W3C "Note"</label>
+        </td>
+      </tr>
+      <tr>
+        <th><label>Links</label></th>
+        <td>
+          <ul id="links"></ul>
+          <table id="another-link">
+            <tr>
+              <th><label for="another-link-url">URL</label></th>
+              <td><input type="text" id="another-link-url" name="another-link-url" /></td>
+            </tr>
+            <tr>
+              <th><label for="another-link-description">Description</label></th>
+              <td><input type="text" id="another-link-description" name="another-link-description" /></td>
+            </tr>
+            <tr>
+              <td colspan="2" id="another-link-submit-wrapper"><button id="another-link-submit">Add</button><span id="another-link-validation"></span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th><label for="bugs">Bugs</label></th>
+        <td><textarea id="bugs" name="bugs"></textarea></td>
+      </tr>
+      <tr>
+        <th><label for="categories">Categories</label></th>
+        <td>
+          <input type="checkbox" value="HTML5" id="HTML5" /><label for="HTML5">HTML5</label><br />
+          <input type="checkbox" value="CSS" id="CSS" /><label for="CSS">CSS</label><br />
+          <input type="checkbox" value="CSS2" id="CSS2" /><label for="CSS2">CSS2</label><br />
+          <input type="checkbox" value="CSS3" id="CSS3" /><label for="CSS3">CSS3</label><br />
+          <input type="checkbox" value="SVG" id="SVG" /><label for="SVG">SVG</label><br />
+          <input type="checkbox" value="PNG" id="PNG" /><label for="PNG">PNG</label><br />
+          <input type="checkbox" value="JS API" id="JS-API" /><label for="JS-API">JS API</label><br />
+          <input type="checkbox" value="Canvas" id="Canvas" /><label for="Canvas">Canvas</label><br />
+          <input type="checkbox" value="DOM" id="DOM" /><label for="DOM">DOM</label><br />
+          <input type="checkbox" value="Other" id="Other" /><label for="Other">Other</label>
+        </td>
+      </tr>
+      <tr>
+        <th><label for="ucprefix">ucprefix</label></th>
+        <td><input type="text" name="ucprefix" id="ucprefix" />
+      </tr>
+      <tr>
+        <th><label for="parent">Parent feature ID</label></th>
+        <td><input type="text" name="parent" id="parent" />
+      </tr>
+      <tr>
+        <th><label for="keywords">Keywords</label></th>
+        <td><input type="text" name="keywords" id="keywords" /><small>Keywords are comma-separated.</small></td>
+      </tr>
+      <tr>
+        <th><label for="ie_id">IE ID</label></th>
+        <td><input type="text" name="ie_id" id="ie_id" />
+      </tr>
+      <tr>
+        <th><label for="chrome_id">CHROME ID</label></th>
+        <td><input type="text" name="chrome_id" id="chrome_id" />
+      </tr>
+      <tr>
+        <th><label for="firefox_id">FIREFOX ID</label></th>
+        <td><input type="text" name="firefox_id" id="firefox_id" />
+      </tr>
+      <tr>
+        <th><label for="safari_id">SAFARI ID</label></th>
+        <td><input type="text" name="safari_id" id="safari_id" />
+      </tr>
+      <tr>
+        <th><label>Shown</label></th>
+        <td><input type="checkbox" value="shown" id="shown" /><label for="shown">Feature is ready to be shown on the site</label></td>
+      </tr>
+    </table>
+    <h2>Support data</h2>
+    <i>Coming soon to a codebase near you...</i>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+body {
+    margin: 40px auto;
+    max-width: 650px;
+    font-size: 16px;
+    color: #333;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+}
+
+h1 {
+    font-size: 200%;
+}
+
+h2 {
+    font-size: 130:
+}
+
+h1, h2 {
+    margin-bottom: 0.25em;
+}
+
+button {
+    cursor: pointer;
+}
+
+#form {
+    width: 100%;
+}
+
+#form td {
+    padding: 7px 10px;
+}
+
+th {
+    text-align: right;
+}
+
+input[type=text] {
+    width: 100%;
+}
+
+#another-link {
+    padding: 5px;
+    background-color: #DDD;
+}
+
+#another-link th {
+    font-weight: normal;
+}
+
+#another-link td {
+    padding: 0 10px;
+}
+
+#another-link-submit {
+    width: 10em;
+}
+
+#another-link-validation {
+    margin-left: 0.5em;
+}
+
+.remove {
+    cursor: pointer;
+    border-bottom: thin dotted gray;
+}
+
+#bugs {
+    width: 100%;
+}
