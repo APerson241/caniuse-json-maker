@@ -66,4 +66,5 @@ input[type=text] {
 
 #bugs {
     width: 100%;
+    resize: vertical;
 }
