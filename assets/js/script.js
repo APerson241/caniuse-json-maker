@@ -20,7 +20,9 @@ document.addEventListener( "DOMContentLoaded", function () {
         newLink.href = url;
         newLink.textContent = url;
         newListElement.appendChild( newLink );
-        newListElement.appendChild( document.createTextNode( " " + description + " " ) );
+        var newSpan = document.createElement( "span" );
+        newSpan.appendChild( document.createTextNode( " " + description + " " ) );
+        newListElement.appendChild( newSpan );
         var newRemove = document.createElement( "span" );
         newRemove.className = "remove";
         newRemove.textContent = "(Remove)";
@@ -84,6 +86,59 @@ document.addEventListener( "DOMContentLoaded", function () {
         newRow.appendChild( newFieldTd );
         document.getElementById( "versions" ).children[0].appendChild( newRow );
         document.getElementById( "version" ).value = "";
+    } );
+
+    document.getElementById( "generate" ).addEventListener( "click", function () {
+        var data = {};
+
+        [
+            "title", "description", "spec", "notes", "ucprefix", "parent",
+            "ie_id", "chrome_id", "firefox_id", "safari_id"
+        ].forEach( function ( property ) {
+            data[property] = document.getElementById( property ).value;
+        } );
+
+        colToArray( document.getElementsByName( "status" ) ).forEach( function ( checkbox ) {
+            if ( checkbox.checked ) {
+                data.status = checkbox.value;
+            }
+        } );
+
+        var links = [];
+        colToArray( document.getElementById( "links" ).children ).forEach( function ( listElement ) {
+            var newLink = {};
+            colToArray( listElement.children ).forEach( function ( child ) {
+                switch ( child.tagName ) {
+                case "A":
+                    newLink.url = child.href;
+                    break;
+                case "SPAN":
+                    if ( child.innnerHTML !== "(Remove)" ) {
+                        newLink.title = child.innerHTML.trim();
+                    }
+                    break;
+                }
+            } );
+        } );
+        data.links = links;
+
+        if ( document.getElementById( "bugs" ).value ) {
+            data.bugs = document.getElementById( "bugs" ).value.split( "\n" );
+        }
+
+        var categories = [];
+        colToArray( document.getElementsByName( "categories" ) ).forEach( function ( categoryElement ) {
+            if ( categoryElement.checked ) {
+                categories.push( categoryElement.value );
+            }
+        } );
+        data.categories = categories;
+
+        data.keywords = document.getElementById( "keywords" ).value;
+
+        data.stats = supportData;
+
+        document.getElementById( "file" ).innerHTML = JSON.stringify( data, null, 2 );
     } );
 
     function storeSupportData ( browser ) {

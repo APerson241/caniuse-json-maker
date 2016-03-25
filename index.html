@@ -62,16 +62,16 @@
       <tr>
         <th><label for="categories">Categories</label></th>
         <td>
-          <input type="checkbox" value="HTML5" id="HTML5" /><label for="HTML5">HTML5</label><br />
-          <input type="checkbox" value="CSS" id="CSS" /><label for="CSS">CSS</label><br />
-          <input type="checkbox" value="CSS2" id="CSS2" /><label for="CSS2">CSS2</label><br />
-          <input type="checkbox" value="CSS3" id="CSS3" /><label for="CSS3">CSS3</label><br />
-          <input type="checkbox" value="SVG" id="SVG" /><label for="SVG">SVG</label><br />
-          <input type="checkbox" value="PNG" id="PNG" /><label for="PNG">PNG</label><br />
-          <input type="checkbox" value="JS API" id="JS-API" /><label for="JS-API">JS API</label><br />
-          <input type="checkbox" value="Canvas" id="Canvas" /><label for="Canvas">Canvas</label><br />
-          <input type="checkbox" value="DOM" id="DOM" /><label for="DOM">DOM</label><br />
-          <input type="checkbox" value="Other" id="Other" /><label for="Other">Other</label>
+          <input type="checkbox" name="categories" value="HTML5" id="HTML5" /><label for="HTML5">HTML5</label><br />
+          <input type="checkbox" name="categories" value="CSS" id="CSS" /><label for="CSS">CSS</label><br />
+          <input type="checkbox" name="categories" value="CSS2" id="CSS2" /><label for="CSS2">CSS2</label><br />
+          <input type="checkbox" name="categories" value="CSS3" id="CSS3" /><label for="CSS3">CSS3</label><br />
+          <input type="checkbox" name="categories" value="SVG" id="SVG" /><label for="SVG">SVG</label><br />
+          <input type="checkbox" name="categories" value="PNG" id="PNG" /><label for="PNG">PNG</label><br />
+          <input type="checkbox" name="categories" value="JS API" id="JS-API" /><label for="JS-API">JS API</label><br />
+          <input type="checkbox" name="categories" value="Canvas" id="Canvas" /><label for="Canvas">Canvas</label><br />
+          <input type="checkbox" name="categories" value="DOM" id="DOM" /><label for="DOM">DOM</label><br />
+          <input type="checkbox" name="categories" value="Other" id="Other" /><label for="Other">Other</label>
         </td>
       </tr>
       <tr>
@@ -156,5 +156,8 @@
         </td>
       </tr>
     </table>
+    <h2>JSON file</h2>
+    <button id="generate">Generate</button>
+    <pre id="file"></pre>
   </body>
 </html>

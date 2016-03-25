@@ -20,6 +20,7 @@ h1, h2 {
 
 button {
     cursor: pointer;
+    font-family: Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif;
 }
 
 #form {
@@ -182,4 +183,19 @@ textarea {
 
 .u {
     background-color: #838383;
+}
+
+#generate {
+    font-size: 150%;
+}
+
+#file {
+    border: thin solid gray;
+    border-radius: 5px;
+    overflow-x: scroll;
+    padding: 10px;
+}
+
+#file:empty {
+    display: none;
 }
