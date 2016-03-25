@@ -110,6 +110,7 @@ textarea {
     border-right: white;
     cursor: auto;
     box-shadow: inset 4px 0 0 0 #347bff;
+    font-weight: bold;
 }
 
 #select-browser li:not(.selected) {
