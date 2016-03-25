@@ -34,13 +34,25 @@ th {
     text-align: right;
 }
 
-input[type=text] {
+input[type=text],textarea {
+    border-radius: 2px;
+    border: thin solid #CCC;
+    padding: 0.3em;
+}
+
+#form input[type=text], #form textarea {
     width: 100%;
+}
+
+input[type=text]:focus {
+    box-shadow: inset 0 0 0 2px #347bff;
+    border-color: #347bff;
+    outline: 0;
 }
 
 #another-link {
     padding: 5px;
-    background-color: #DDD;
+    background-color: #DDF;
 }
 
 #another-link th {
@@ -64,7 +76,109 @@ input[type=text] {
     border-bottom: thin dotted gray;
 }
 
-#bugs {
+textarea {
     width: 100%;
     resize: vertical;
+}
+
+#support-data-container {
+    border-collapse: collapse;
+}
+
+#support-data-container td {
+    padding: 0;
+    margin: 0;
+}
+
+#select-browser ul {
+    list-style: none;
+    padding: 0;
+    margin: -1px 0 0 -1px;
+    width: 7em;
+}
+
+#select-browser li {
+    border: thin solid black;
+    cursor: pointer;
+    margin: 0;
+    margin-bottom: -1px;
+    padding: 0.25em;
+    padding-left: 0.5em;
+}
+
+#select-browser li.selected {
+    border-right: white;
+    cursor: auto;
+    box-shadow: inset 4px 0 0 0 #347bff;
+}
+
+#select-browser li:not(.selected) {
+    background-color: #DDD;
+}
+
+#select-browser li:not(.selected):hover {
+    background-color: #EEE;
+}
+
+#browser-info-table-cell {
+    width: 100%;
+    vertical-align: top;
+    border: solid black;
+    border-width: thin thin thin 0;
+}
+
+#add-version {
+    background-color: #CFD;
+    padding: 0.75em;
+    margin: 1em;
+}
+
+#add-version-label {
+    font-size: 80%;
+    display: block;
+}
+
+#version {
+    width: 60%;
+}
+
+#versions {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#versions th {
+    padding: 0.5em;
+}
+
+#versions th, #versions td {
+    border: thin solid #BBB;
+    text-align: center;
+}
+
+#versions input[type=text] {
+    width: 3em;
+}
+
+#versions input[type=radio], #versions input[type=checkbox] {
+    width: 100%;
+    margin: 0;
+}
+
+.n, .p {
+    color: white;
+    background-color: #c44230;
+}
+
+.y {
+    color: white;
+    background-color: #39b54a;
+}
+
+.a {
+    background-color: #a8bd04;
+}
+
+.u {
+    background-color: #838383;
 }

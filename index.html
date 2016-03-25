@@ -75,6 +75,9 @@
         </td>
       </tr>
       <tr>
+        <th><label for="notes">General notes</label></th>
+        <td><textarea name="notes" id="notes"></textarea></td>
+      <tr>
         <th><label for="ucprefix">ucprefix</label></th>
         <td><input type="text" name="ucprefix" id="ucprefix" />
       </tr>
@@ -108,6 +111,50 @@
       </tr>
     </table>
     <h2>Support data</h2>
-    <i>Coming soon to a codebase near you...</i>
+    <table id="support-data-container">
+      <tr>
+        <td>
+          <nav id="select-browser">
+            <ul>
+              <li id="select-ie" class="selected">IE</li>
+              <li id="select-edge">Edge</li>
+              <li id="select-firefox">Firefox</li>
+              <li id="select-chrome">Chrome</li>
+              <li id="select-safari">Safari</li>
+              <li id="select-opera">Opera</li>
+              <li id="select-ios_saf">iOS Safari</li>
+              <li id="select-op_mini">Opera Mini</li>
+              <li id="select-android">Android Browser</li>
+              <li id="select-bb">Blackberry Browser</li>
+              <li id="select-op_mob">Opera Mobile</li>
+              <li id="select-and_chr">Chrome for Android</li>
+              <li id="select-and_ff">Firefox for Android</li>
+              <li id="select-ie_mob">IE Mobile</li>
+              <li id="select-and_uc">UC Browser for Android</li>
+            </ul>
+          </nav>
+        </td>
+        <td id="browser-info-table-cell" height="100%">
+          <div id="add-version">
+            <label for="version">Version</label>
+            <input type="text" id="version" />
+            <button id="add-version-button">Add</button>
+          </div>
+          <table id="versions">
+            <tr>
+              <th>Version</th>
+              <th class="y">y</th>
+              <th class="a">a</th>
+              <th class="n">n</th>
+              <th class="p">p</th>
+              <th class="u">u</th>
+              <th class="x">x</th>
+              <th class="d">d</th>
+              <th>Notes</th>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
