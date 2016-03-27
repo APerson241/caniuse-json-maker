@@ -57,34 +57,7 @@ document.addEventListener( "DOMContentLoaded", function () {
             return;
         }
 
-        var newRow = document.createElement( "tr" );
-        var newTh = document.createElement( "th" );
-        newTh.appendChild( document.createTextNode( version ) );
-        newRow.appendChild( newTh );
-        [ "y", "a", "n", "p", "u" ].forEach( function ( value ) {
-            var newTd = document.createElement( "td" );
-            var newButton = document.createElement( "input" );
-            newButton.type = "radio";
-            newButton.name = "v" + version.replace( " ", "-" );
-            newButton.value = value;
-            newTd.appendChild( newButton );
-            newRow.appendChild( newTd );
-        } );
-        [ "x", "d" ].forEach( function ( value ) {
-            var newTd = document.createElement( "td" );
-            var newButton = document.createElement( "input" );
-            newButton.type = "checkbox";
-            newButton.value = value;
-            newTd.appendChild( newButton );
-            newRow.appendChild( newTd );
-        } );
-        var newFieldTd = document.createElement( "td" );
-        var newField = document.createElement( "input" );
-        newField.type = "text";
-        newField.disabled = true;
-        newFieldTd.appendChild( newField );
-        newRow.appendChild( newFieldTd );
-        document.getElementById( "versions" ).children[0].appendChild( newRow );
+        createNewRow( version, "" );
         document.getElementById( "version" ).value = "";
     } );
 
@@ -93,7 +66,7 @@ document.addEventListener( "DOMContentLoaded", function () {
 
         [
             "title", "description", "spec", "notes", "ucprefix", "parent",
-            "ie_id", "chrome_id", "firefox_id", "safari_id"
+            "ie_id", "chrome_id", "firefox_id", "safari_id", "keywords"
         ].forEach( function ( property ) {
             data[property] = document.getElementById( property ).value;
         } );
@@ -134,9 +107,9 @@ document.addEventListener( "DOMContentLoaded", function () {
         } );
         data.categories = categories;
 
-        data.keywords = document.getElementById( "keywords" ).value;
-
         data.stats = supportData;
+
+        data.shown = document.getElementById( "shown" ).checked;
 
         document.getElementById( "file" ).innerHTML = JSON.stringify( data, null, 2 );
     } );
@@ -181,38 +154,41 @@ document.addEventListener( "DOMContentLoaded", function () {
             browserData = supportData[browser];
         clearSupportData();
         for ( var versionNumber in browserData ) {
-            var versionData = browserData[versionNumber];
-            var newRow = document.createElement( "tr" );
-            var newTh = document.createElement( "th" );
-            newTh.appendChild( document.createTextNode( versionNumber ) );
-            newRow.appendChild( newTh );
-            [ "y", "a", "n", "p", "u" ].forEach( function ( value ) {
-                var newTd = document.createElement( "td" );
-                var newButton = document.createElement( "input" );
-                newButton.type = "radio";
-                newButton.name = "v" + versionNumber.replace( " ", "-" );
-                newButton.value = value;
-                newButton.checked = versionData.indexOf( value ) !== -1;
-                newTd.appendChild( newButton );
-                newRow.appendChild( newTd );
-            } );
-            [ "x", "d" ].forEach( function ( value ) {
-                var newTd = document.createElement( "td" );
-                var newButton = document.createElement( "input" );
-                newButton.type = "checkbox";
-                newButton.value = value;
-                newButton.checked = versionData.indexOf( value ) !== -1;
-                newTd.appendChild( newButton );
-                newRow.appendChild( newTd );
-            } );
-            var newFieldTd = document.createElement( "td" );
-            var newField = document.createElement( "input" );
-            newField.type = "text";
-            newField.disabled = true;
-            newFieldTd.appendChild( newField );
-            newRow.appendChild( newFieldTd );
-            document.getElementById( "versions" ).children[0].appendChild( newRow );
+            createNewRow( versionNumber, browserData[versionNumber] );
         }
+    }
+
+    function createNewRow ( versionNumber, versionData ) {
+        var newRow = document.createElement( "tr" );
+        var newTh = document.createElement( "th" );
+        newTh.appendChild( document.createTextNode( versionNumber ) );
+        newRow.appendChild( newTh );
+        [ "y", "a", "n", "p", "u" ].forEach( function ( value ) {
+            var newTd = document.createElement( "td" );
+            var newButton = document.createElement( "input" );
+            newButton.type = "radio";
+            newButton.name = "v" + versionNumber.replace( " ", "-" );
+            newButton.value = value;
+            newButton.checked = versionData.indexOf( value ) !== -1;
+            newTd.appendChild( newButton );
+            newRow.appendChild( newTd );
+        } );
+        [ "x", "d" ].forEach( function ( value ) {
+            var newTd = document.createElement( "td" );
+            var newButton = document.createElement( "input" );
+            newButton.type = "checkbox";
+            newButton.value = value;
+            newButton.checked = versionData.indexOf( value ) !== -1;
+            newTd.appendChild( newButton );
+            newRow.appendChild( newTd );
+        } );
+        var newFieldTd = document.createElement( "td" );
+        var newField = document.createElement( "input" );
+        newField.type = "text";
+        newField.disabled = true;
+        newFieldTd.appendChild( newField );
+        newRow.appendChild( newFieldTd );
+        document.getElementById( "versions" ).children[0].appendChild( newRow );
     }
 
     // From http://stackoverflow.com/a/3975573/1757964
