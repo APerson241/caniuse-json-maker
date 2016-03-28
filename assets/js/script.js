@@ -1,6 +1,9 @@
 document.addEventListener( "DOMContentLoaded", function () {
     var supportData = {};
 
+    // Event listeners
+    // -------------------------------------------
+
     document.getElementById( "another-link-submit" ).addEventListener( "click", function () {
         var url = document.getElementById( "another-link-url" ).value,
             description = document.getElementById( "another-link-description" ).value,
@@ -105,17 +108,38 @@ document.addEventListener( "DOMContentLoaded", function () {
                 categories.push( categoryElement.value );
             }
         } );
+
         data.categories = categories;
-
         data.stats = supportData;
-
         data.shown = document.getElementById( "shown" ).checked;
+
+        data.notes_by_num = {};
+        document.getElementById( "support-notes" ).value.split( /\r|\r\n|\n/ ).forEach( function ( note, index ) {
+            data.notes_by_num[index + 1] = note;
+        } );
 
         document.getElementById( "file" ).innerHTML = JSON.stringify( data, null, 2 );
     } );
 
+    document.getElementById( "support-notes" ).addEventListener( "keyup", function () {
+        var notesText = document.getElementById( "support-notes" ).value
+        var lineCount = notesText ? notesText.split( /\r|\r\n|\n/ ).length : 0;
+        document.getElementById( "support-notes-status" ).innerHTML = lineCount +
+            " note" + ( lineCount === 1 ? "" : "s" ) + " entered.";
+    } );
+
+    document.body.addEventListener( "click", function ( event ) {
+        storeSupportData();
+    } );
+
+    // Support data functions
+    // -------------------------------------------
+
     function storeSupportData ( browser ) {
         var data = {};
+        if ( typeof browser === "undefined" ) {
+            browser = document.getElementsByClassName( "selected" )[0].id.replace( "select-", "" );
+        }
         colToArray( document.getElementById( "versions" ).children[0].children ).forEach( function ( versionTr ) {
             if ( versionTr.children[0].textContent === "Version" ) {
                 return;
@@ -127,17 +151,19 @@ document.addEventListener( "DOMContentLoaded", function () {
             colToArray( versionTr.children ).forEach( function ( versionTd ) {
                 if ( versionTd.tagName === "TH" ) {
                     version = versionTd.textContent;
-                } else {
+                } else if ( versionTd.children[0] ) {
                     var inputElement = versionTd.children[0];
                     if ( ( inputElement.type === "radio" ) && !status && inputElement.checked ) {
                         status = inputElement.value;
                     } else if ( ( inputElement.type === "checkbox" ) && inputElement.checked ) {
                         statusSuffix += " " + inputElement.value;
+                    } else if ( inputElement.type === "text" ) {
+                        statusSuffix += " " + inputElement.value;
                     }
                 }
             } );
-            status += statusSuffix;
-            data[version] = status;
+            status += statusSuffix.replace( "  ", " " );
+            data[version] = status.trim();
         } );
         supportData[browser] = data;
     }
@@ -161,6 +187,7 @@ document.addEventListener( "DOMContentLoaded", function () {
     function createNewRow ( versionNumber, versionData ) {
         var newRow = document.createElement( "tr" );
         var newTh = document.createElement( "th" );
+        newTh.className = "version-cell";
         newTh.appendChild( document.createTextNode( versionNumber ) );
         newRow.appendChild( newTh );
         [ "y", "a", "n", "p", "u" ].forEach( function ( value ) {
@@ -185,11 +212,24 @@ document.addEventListener( "DOMContentLoaded", function () {
         var newFieldTd = document.createElement( "td" );
         var newField = document.createElement( "input" );
         newField.type = "text";
-        newField.disabled = true;
+        newField.value = allMatches( /#\d+/g, versionData )
+            .reduce( function ( x, y ) { return x + " " + y; }, "" )
+            .trim();
         newFieldTd.appendChild( newField );
         newRow.appendChild( newFieldTd );
+        var newDelete = document.createElement( "td" );
+        newDelete.className = "delete";
+        newDelete.innerHTML = "&times;";
+        newDelete.addEventListener( "click", function () {
+            this.parentElement.parentElement.removeChild( this.parentElement );
+            storeSupportData();
+        } );
+        newRow.appendChild( newDelete );
         document.getElementById( "versions" ).children[0].appendChild( newRow );
     }
+
+    // Other utility functions
+    // -------------------------------------------
 
     // From http://stackoverflow.com/a/3975573/1757964
     function isValidUrl ( url ) {
@@ -198,12 +238,25 @@ document.addEventListener( "DOMContentLoaded", function () {
 
     // Coverts a HTMLCollection to an array
     // From http://stackoverflow.com/a/222847/1757964
-    function colToArray( htmlCollection ) {
+    function colToArray ( htmlCollection ) {
         return Array.prototype.slice.call( htmlCollection );
     }
 
-    function forEachBrowserTab( callback ) {
+    function forEachBrowserTab ( callback ) {
         var ul = document.getElementById( "select-browser" ).children[0];
         colToArray( ul.children ).forEach( callback );
+    }
+
+    // From http://stackoverflow.com/a/6323598/1757964
+    function allMatches ( regex, string ) {
+        var matches = [],
+            match;
+        do {
+            match = regex.exec( string );
+            if ( match ) {
+                matches.push( match );
+            }
+        } while ( match );
+        return matches;
     }
 } );

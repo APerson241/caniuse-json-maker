@@ -142,7 +142,7 @@
           </div>
           <table id="versions">
             <tr>
-              <th>Version</th>
+              <th class="version-cell">Version</th>
               <th class="y">y</th>
               <th class="a">a</th>
               <th class="n">n</th>
@@ -151,11 +151,15 @@
               <th class="x">x</th>
               <th class="d">d</th>
               <th>Notes</th>
+              <th class="delete"></th>
             </tr>
           </table>
         </td>
       </tr>
     </table>
+    <h3>Notes</h3>
+    <i>One per line. </i><span id="support-notes-status">0 notes entered.</span>
+    <textarea id="support-notes"></textarea>
     <h2>JSON file</h2>
     <button id="generate">Generate</button>
     <pre id="file"></pre>
